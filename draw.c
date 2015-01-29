@@ -6,7 +6,7 @@
 /*   By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/12 06:45:37 by ycribier          #+#    #+#             */
-/*   Updated: 2015/01/29 19:42:57 by ycribier         ###   ########.fr       */
+/*   Updated: 2015/01/29 19:58:39 by ycribier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ static void	get_collision_infos(t_pt *pt1, t_pt *pt2, t_col *col, t_env *e)
 	p = col->type;
 }
 
-#include <stdio.h>
-
 static void	draw_column(t_img *img, int i, double dst, int color)
 {
 	int		j;
@@ -76,7 +74,7 @@ static void	draw_column(t_img *img, int i, double dst, int color)
 		j0 = 0;
 	while (j < height && j < W_HEIGHT)
 	{
-		if (j  < 0.02 * height || j > 0.98 * height)
+		if (j < 0.02 * height || j > 0.98 * height)
 		{
 			clr = 0xFFFFFF;
 		}
@@ -94,7 +92,7 @@ static int	get_color(double angle, char type)
 		return (0x3498DB);
 	if (angle > 90 && angle < 270 && type == 2)
 		return (0xE74C3C);
-	if (((angle > 270 && angle < 360)|| (angle >= 0 && angle < 90))
+	if (((angle > 270 && angle < 360) || (angle >= 0 && angle < 90))
 			&& type == 2)
 		return (0xECF0F1);
 	return (0xFF0000);

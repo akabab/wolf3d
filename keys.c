@@ -6,7 +6,7 @@
 /*   By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/16 12:44:42 by ycribier          #+#    #+#             */
-/*   Updated: 2015/01/29 19:44:03 by ycribier         ###   ########.fr       */
+/*   Updated: 2015/01/29 20:00:00 by ycribier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		key_release(int keycode, t_env *e)
 		e->keys->up = FALSE;
 	if (keycode == KEY_DOWN)
 		e->keys->down = FALSE;
-		if (keycode == KEY_SHIFT)
+	if (keycode == KEY_SHIFT)
 		e->pl.speed = 30;
 	if (keycode == KEY_DBG)
 	{
