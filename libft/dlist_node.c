@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_node.c                                        :+:      :+:    :+:   */
+/*   dlist_node.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/07 15:23:56 by ycribier          #+#    #+#             */
-/*   Updated: 2014/01/08 16:25:30 by ycribier         ###   ########.fr       */
+/*   Updated: 2014/02/19 18:28:01 by ycribier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
-#include "list.h"
+#include "dlist.h"
 
-void	list_push_back(t_dlist *list, void *value)
+void	dlist_push_back(t_dlist *dlist, void *value)
 {
 	t_dlist_node		*node;
 
@@ -25,31 +25,31 @@ void	list_push_back(t_dlist *list, void *value)
 		return ;
 	}
 	node->value = value;
-	if (list->last == NULL)
+	if (dlist->last == NULL)
 	{
-		list->first = node;
-		list->last = node;
+		dlist->first = node;
+		dlist->last = node;
 	}
 	else
 	{
-		list->last->next = node;
-		node->prev = list->last;
-		list->last = node;
+		dlist->last->next = node;
+		node->prev = dlist->last;
+		dlist->last = node;
 	}
-	list->count++;
+	dlist->count++;
 }
 
-void	*list_pop_back(t_dlist *list)
+void	*dlist_pop_back(t_dlist *dlist)
 {
 	t_dlist_node		*node;
 
-	node = list->last;
+	node = dlist->last;
 	if (node)
-		return (list_remove(list, node));
+		return (dlist_remove(dlist, node));
 	return (NULL);
 }
 
-void	list_push_front(t_dlist *list, void *value)
+void	dlist_push_front(t_dlist *dlist, void *value)
 {
 	t_dlist_node		*node;
 
@@ -60,26 +60,26 @@ void	list_push_front(t_dlist *list, void *value)
 		return ;
 	}
 	node->value = value;
-	if (list->first == NULL)
+	if (dlist->first == NULL)
 	{
-		list->first = node;
-		list->last = node;
+		dlist->first = node;
+		dlist->last = node;
 	}
 	else
 	{
-		node->next = list->first;
-		list->first->prev = node;
-		list->first = node;
+		node->next = dlist->first;
+		dlist->first->prev = node;
+		dlist->first = node;
 	}
-	list->count++;
+	dlist->count++;
 }
 
-void	*list_pop_front(t_dlist *list)
+void	*dlist_pop_front(t_dlist *dlist)
 {
 	t_dlist_node		*node;
 
-	node = list->first;
+	node = dlist->first;
 	if (node)
-		return (list_remove(list, node));
+		return (dlist_remove(dlist, node));
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/27 18:18:52 by ycribier          #+#    #+#             */
-/*   Updated: 2013/12/29 20:32:06 by ycribier         ###   ########.fr       */
+/*   Updated: 2015/01/28 18:00:27 by ycribier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strtrim(char const *s)
 	while (len > 0
 			&& (s[len - 1] == ' ' || s[len - 1] == '\n' || s[len - 1] == '\t'))
 		len--;
-	s_trim = (char *) malloc((len + 1) * sizeof(*s_trim));
+	s_trim = (char *)malloc((len + 1) * sizeof(*s_trim));
 	ft_strncpy(s_trim, s, len);
 	s_trim[len] = '\0';
 	return (s_trim);

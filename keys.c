@@ -6,7 +6,7 @@
 /*   By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/16 12:44:42 by ycribier          #+#    #+#             */
-/*   Updated: 2014/01/19 19:35:46 by ycribier         ###   ########.fr       */
+/*   Updated: 2015/01/29 19:44:03 by ycribier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,7 @@ t_keys	*init_keys(void)
 
 	keys = malloc(sizeof(keys));
 	if (keys == NULL)
-	{
-		error_msg(NULL, NULL);
 		exit(EXIT_FAILURE);
-	}
 	keys->up = FALSE;
 	keys->down = FALSE;
 	keys->right = FALSE;

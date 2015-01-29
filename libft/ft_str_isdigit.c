@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_str_isdigit.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/22 11:03:50 by ycribier          #+#    #+#             */
-/*   Updated: 2015/01/28 17:59:05 by ycribier         ###   ########.fr       */
+/*   Created: 2014/02/23 20:37:39 by ycribier          #+#    #+#             */
+/*   Updated: 2014/02/23 21:42:57 by ycribier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
-char	*ft_strchr(char const *str, int c)
+int		ft_str_isdigit(char *str)
 {
-	size_t	i;
-
-	i = 0;
-	while (str[i] != '\0')
+	if (!*str)
+		return (0);
+	while (str && *str)
 	{
-		if (str[i] == c)
-			return ((char *)&str[i]);
-		i++;
+		if (!ft_isdigit(*str))
+			return (0);
+		str++;
 	}
-	if (str[i] == c)
-		return ((char *)&str[i]);
-	else
-		return (NULL);
+	return (1);
 }

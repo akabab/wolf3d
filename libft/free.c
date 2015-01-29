@@ -1,30 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/22 11:03:50 by ycribier          #+#    #+#             */
-/*   Updated: 2015/01/28 17:59:05 by ycribier         ###   ########.fr       */
+/*   Created: 2014/02/22 01:47:21 by ycribier          #+#    #+#             */
+/*   Updated: 2014/03/08 23:47:27 by ycribier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <stdlib.h>
 
-char	*ft_strchr(char const *str, int c)
+void	free_tab(char ***tab)
 {
-	size_t	i;
+	char	**tmp;
 
-	i = 0;
-	while (str[i] != '\0')
+	tmp = *tab;
+	while (**tab)
 	{
-		if (str[i] == c)
-			return ((char *)&str[i]);
-		i++;
+		free(**tab);
+		(*tab)++;
 	}
-	if (str[i] == c)
-		return ((char *)&str[i]);
-	else
-		return (NULL);
+	free(tmp);
+}
+
+void	free_ntab(char ***tab, int n)
+{
+	char	**tmp;
+
+	tmp = *tab;
+	while (n)
+	{
+		free(**tab);
+		(*tab)++;
+		n--;
+	}
+	free(tmp);
 }

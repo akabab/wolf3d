@@ -6,7 +6,7 @@
 /*   By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/27 20:21:03 by ycribier          #+#    #+#             */
-/*   Updated: 2013/12/29 20:29:24 by ycribier         ###   ########.fr       */
+/*   Updated: 2015/01/28 17:57:23 by ycribier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_itoa(int n)
 	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
 	len = ft_nbrlen(n);
-	if (!(s = (char *) malloc((len + 1) * sizeof(*s))))
+	if (!(s = (char *)malloc((len + 1) * sizeof(*s))))
 		return (NULL);
 	if (n < 0)
 	{

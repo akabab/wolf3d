@@ -5,42 +5,32 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/01/07 12:11:54 by ycribier          #+#    #+#             */
-/*   Updated: 2014/01/10 00:33:03 by ycribier         ###   ########.fr       */
+/*   Created: 2014/02/19 16:27:03 by ycribier          #+#    #+#             */
+/*   Updated: 2015/01/28 19:02:34 by ycribier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIST_H
 # define LIST_H
 
-typedef struct		s_dlist_node
+# include <stdlib.h>
+# include "libft.h"
+
+typedef struct			s_list_node
 {
-	struct s_dlist_node	*next;
-	struct s_dlist_node	*prev;
 	void				*value;
-}					t_dlist_node;
+	struct s_list_node	*next;
+}						t_list_node;
 
-typedef struct		s_dlist
-{
-	int				count;
-	t_dlist_node	*first;
-	t_dlist_node	*last;
-}					t_dlist;
+t_list_node				*list_push_back(t_list_node **begin, void *value);
+void					*list_pop_back(t_list_node **begin);
+void					list_push_front(t_list_node **begin, void *value);
+void					*list_pop_front(t_list_node **begin);
 
-t_dlist		*list_create(void);
-void		list_destroy(t_dlist *list);
-void		list_clear(t_dlist *list);
-void		list_clear_destroy(t_dlist *list);
+void					list_destroy(t_list_node **begin);
+void					list_clear(t_list_node **begin);
+void					list_clear_destroy(t_list_node **begin);
+void					*list_remove(t_list_node **begin, t_list_node *node);
+void					list_remove_by_value(t_list_node **begin, void *value);
 
-# define list_count(A) ((A)->count)
-# define list_first(A) ((A)->first != NULL ? (A)->first->value : NULL)
-# define list_last(A) ((A)->last != NULL ? (A)->last->value : NULL)
-
-void		list_push_back(t_dlist *list, void *value);
-void		*list_pop_back(t_dlist *list);
-void		list_push_front(t_dlist *list, void *value);
-void		*list_pop_front(t_dlist *list);
-
-void		*list_remove(t_dlist *list, t_dlist_node *node);
-
-#endif /* !LIST_H */
+#endif

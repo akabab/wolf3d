@@ -6,10 +6,11 @@
 #    By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/26 16:39:11 by ycribier          #+#    #+#              #
-#    Updated: 2014/01/13 19:08:36 by ycribier         ###   ########.fr        #
+#    Updated: 2015/01/29 19:50:52 by ycribier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+CC		=	cc -g -O2 $(FLAGS)
 FLAGS	=	-Wall -Wextra -Werror
 NAME	=	libft.a
 INCLUDES=	./includes
@@ -41,6 +42,7 @@ SRCS	=	ft_memset.c					\
 			ft_isprint.c				\
 			ft_toupper.c				\
 			ft_tolower.c				\
+			ft_str_isdigit.c			\
 			ft_memalloc.c				\
 			ft_memdel.c					\
 			ft_strnew.c					\
@@ -72,15 +74,24 @@ SRCS	=	ft_memset.c					\
 			ft_lstiter.c				\
 			ft_lstmap.c					\
 			ft_lstpush.c				\
+			ft_min.c					\
 			ft_abs.c					\
 			ft_power.c					\
 			degree_radian.c				\
 			ft_nbrlen.c					\
 			ft_perror.c					\
-			get_next_line.c				\
+			free.c						\
+			dlist.c						\
+			dlist_node.c				\
+			dlist_node_rm.c				\
 			list.c						\
-			list_node.c					\
-			list_node_rm.c
+			list_rm.c					\
+			htable.c					\
+			htable_rm.c					\
+			hft.c						\
+			ft_printf.c					\
+			dec_oct.c					\
+			get_next_line.c
 OBJS	=	$(SRCS:.c=.o)
 
 # COLORS
@@ -101,9 +112,9 @@ $(NAME): $(OBJS)
 	@ranlib $@
 	@echo "Compiling & indexing" [ $(NAME) ] $(SUCCESS)
 
-%.o: %.c
-	@gcc $(FLAGS) -c -o $@ $^ -I $(INCLUDES)
-	@echo "Linking" [ $^ ] $(OK)
+%.o: %.c $(INCLUDES)/libft.h
+	@$(CC) -c -o $@ $< -I $(INCLUDES)
+	@echo "Linking" [ $< ] $(OK)
 
 clean:
 	@rm -f $(OBJS)
@@ -111,7 +122,6 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "Delete" [ $(NAME) ] $(OK)
 
 re: fclean all
 

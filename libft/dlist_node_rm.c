@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_node_rm.c                                     :+:      :+:    :+:   */
+/*   dlist_node_rm.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/08 15:47:59 by ycribier          #+#    #+#             */
-/*   Updated: 2014/01/10 00:33:54 by ycribier         ###   ########.fr       */
+/*   Updated: 2014/02/19 16:15:01 by ycribier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "list.h"
+#include "dlist.h"
 
-static void		list_remove_first(t_dlist *list, t_dlist_node *node)
+static void		dlist_remove_first(t_dlist *dlist, t_dlist_node *node)
 {
-	list->first = node->next;
-	list->first->prev = NULL;
+	dlist->first = node->next;
+	dlist->first->prev = NULL;
 }
 
-static void		list_remove_last(t_dlist *list, t_dlist_node *node)
+static void		dlist_remove_last(t_dlist *dlist, t_dlist_node *node)
 {
-	list->last = node->prev;
-	list->last->next = NULL;
+	dlist->last = node->prev;
+	dlist->last->next = NULL;
 }
 
-static void		list_remove_middle(t_dlist_node *node)
+static void		dlist_remove_middle(t_dlist_node *node)
 {
 	t_dlist_node		*tmp_next;
 	t_dlist_node		*tmp_prev;
@@ -36,25 +36,25 @@ static void		list_remove_middle(t_dlist_node *node)
 	tmp_prev->next = tmp_next;
 }
 
-void			*list_remove(t_dlist *list, t_dlist_node *node)
+void			*dlist_remove(t_dlist *dlist, t_dlist_node *node)
 {
 	void	*del_node_value;
 
 	del_node_value = NULL;
-	if (list->first && list->last && node)
+	if (dlist->first && dlist->last && node)
 	{
-		if (node == list->first && node == list->last)
+		if (node == dlist->first && node == dlist->last)
 		{
-			list->first = NULL;
-			list->last = NULL;
+			dlist->first = NULL;
+			dlist->last = NULL;
 		}
-		else if (node == list->first)
-			list_remove_first(list, node);
-		else if (node == list->last)
-			list_remove_last(list, node);
+		else if (node == dlist->first)
+			dlist_remove_first(dlist, node);
+		else if (node == dlist->last)
+			dlist_remove_last(dlist, node);
 		else
-			list_remove_middle(node);
-		list->count--;
+			dlist_remove_middle(node);
+		dlist->count--;
 		del_node_value = node->value;
 		free(node);
 	}

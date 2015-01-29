@@ -6,25 +6,25 @@
 /*   By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/18 20:11:01 by ycribier          #+#    #+#             */
-/*   Updated: 2013/12/20 21:11:18 by ycribier         ###   ########.fr       */
+/*   Updated: 2014/02/05 19:31:30 by ycribier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstpush(t_list **alst, t_list *new)
+void	ft_lstpush(t_list **begin, t_list *new)
 {
-	t_list		*last;
+	t_list		*cur;
 
-	if (!alst || !new)
+	if (!begin || !new)
 		return ;
-	if (!*alst)
+	if (!*begin)
 	{
-		*alst = new;
+		*begin = new;
 		return ;
 	}
-	last = *alst;
-	while (last->next)
-		last = last->next;
-	last->next = new;
+	cur = *begin;
+	while (cur->next)
+		cur = cur->next;
+	cur->next = new;
 }

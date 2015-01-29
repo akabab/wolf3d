@@ -6,7 +6,7 @@
 /*   By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/29 14:29:02 by ycribier          #+#    #+#             */
-/*   Updated: 2014/01/07 12:00:08 by ycribier         ###   ########.fr       */
+/*   Updated: 2015/01/28 18:52:04 by ycribier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,18 @@
 
 t_list	*ft_lstnew(void const *content, size_t content_size)
 {
-	t_list	*lst;
+	t_list	*new;
 
-	if (!(lst = (t_list *)ft_memalloc(sizeof(t_list))))
+	if (!(new = (t_list *)ft_memalloc(sizeof(t_list))))
 		return (NULL);
-	if (!(lst->content = ft_memalloc(content_size)))
+	if (!(new->content = ft_memalloc(content_size)))
 	{
-		free(lst);
+		free(new);
 		return (NULL);
 	}
-	ft_memcpy(lst->content, content, content_size);
-	lst->content_size = content_size;
-	lst->next = NULL;
-	return (lst);
+	if (content)
+		ft_memcpy(new->content, content, content_size);
+	new->content_size = content ? content_size : 0;
+	new->next = NULL;
+	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/22 11:12:54 by ycribier          #+#    #+#             */
-/*   Updated: 2013/12/31 00:56:09 by ycribier         ###   ########.fr       */
+/*   Updated: 2015/01/28 17:58:50 by ycribier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,5 @@
 
 void	ft_putstr(char const *s)
 {
-
 	write(1, s, ft_strlen(s));
 }

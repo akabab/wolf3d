@@ -5,59 +5,79 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/19 12:13:11 by ycribier          #+#    #+#             */
-/*   Updated: 2014/01/09 14:58:01 by ycribier         ###   ########.fr       */
+/*   Created: 2015/01/28 12:44:13 by ycribier          #+#    #+#             */
+/*   Updated: 2015/01/28 19:22:53 by ycribier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/uio.h>
 #include <unistd.h>
 #include "libft.h"
 
-int					checkline(char *buffer)
+static char		*safe_join(char *s1, char const *s2)
 {
-	int				j;
+	size_t	s1_len;
+	size_t	s2_len;
+	char	*result;
 
-	j = 0;
-	while (buffer[j] != '\0')
+	s1_len = (s1) ? ft_strlen(s1) : 0;
+	s2_len = ft_strlen(s2);
+	result = ft_strnew(s1_len + s2_len);
+	if (result)
 	{
-		if (buffer[j] == '\n')
-		{
-			buffer[j] = '\0';
-			return (0);
-		}
-		j++;
+		if (s1)
+			ft_memcpy(result, s1, s1_len);
+		ft_memcpy(result + s1_len, s2, s2_len);
 	}
-	return (1);
+	if (s1)
+		ft_strdel(&s1);
+	return (result);
 }
 
-int					get_next_line(int const fd, char **line)
+static int		cut_at_newline(char **s_buff, char **line)
 {
-	char			*str;
-	int				bytes;
-	static char		*buffer = "";
+	char	*at;
 
-	bytes = GNL_BUFF_SIZE;
-	if (bytes == 0)
-		return (0);
-	while (checkline(buffer) && bytes == GNL_BUFF_SIZE)
+	if ((at = ft_strchr(*s_buff, '\n')))
 	{
-		str = (char *)ft_memalloc(sizeof(char) * (GNL_BUFF_SIZE + 1));
-		ft_strclr(str);
-		bytes = read(fd, str, GNL_BUFF_SIZE);
-		if (bytes == -1)
-			return (-1);
-		buffer = ft_strjoin(buffer, str);
-		free(str);
-	}
-	str = (char *)ft_memalloc(sizeof(char) * (ft_strlen(buffer) + 1));
-	ft_memcpy(str, buffer, ft_strlen(buffer));
-	buffer = buffer + ft_strlen(str) + 1;
-	*line = ft_strdup(str);
-	free(str);
-	if (bytes > 1 || (bytes == 0 && ft_strlen(*line) > 0))
+		*line = ft_strsub(*s_buff, 0, at - *s_buff);
+		ft_strcpy(*s_buff, at + 1);
 		return (1);
-	return (bytes);
+	}
+	return (0);
+}
+
+static void		clear(char **s_buff, char **line)
+{
+	if (*s_buff)
+		ft_strdel(s_buff);
+	ft_strdel(line);
+}
+
+int				get_next_line(int const fd, char **line)
+{
+	int				bytes_read;
+	char			buff[BUFF_SIZE + 1];
+	static char		*s_buff = NULL;
+
+	if (!line)
+		return (-1);
+	if (s_buff && cut_at_newline(&s_buff, line))
+		return (1);
+	while ((bytes_read = read(fd, buff, BUFF_SIZE)) > 0)
+	{
+		buff[bytes_read] = '\0';
+		s_buff = safe_join(s_buff, buff);
+		if (cut_at_newline(&s_buff, line))
+			return (1);
+	}
+	if (bytes_read == -1)
+		return (-1);
+	if (s_buff && *s_buff)
+	{
+		*line = ft_strdup(s_buff);
+		ft_strdel(&s_buff);
+		return (1);
+	}
+	clear(&s_buff, line);
+	return (0);
 }

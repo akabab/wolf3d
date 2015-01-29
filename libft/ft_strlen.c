@@ -6,21 +6,20 @@
 /*   By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/22 10:56:27 by ycribier          #+#    #+#             */
-/*   Updated: 2014/01/03 20:12:45 by ycribier         ###   ########.fr       */
+/*   Updated: 2014/03/17 12:43:41 by ycribier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(char *s)
 {
-	size_t	len;
+	char	*tmp;
 
-	len = 0;
-	while (s && *s)
-	{
-		len++;
-		s++;
-	}
-	return (len);
+	if (!s)
+		return (0);
+	tmp = s;
+	while (*tmp)
+		tmp++;
+	return (tmp - s);
 }

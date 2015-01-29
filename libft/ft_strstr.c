@@ -6,7 +6,7 @@
 /*   By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/22 11:05:18 by ycribier          #+#    #+#             */
-/*   Updated: 2013/11/25 17:59:06 by ycribier         ###   ########.fr       */
+/*   Updated: 2015/01/28 18:00:05 by ycribier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ char	*ft_strstr(char const *str, char const *to_find)
 			str++;
 		}
 	}
-	return ((char *) str);
+	return ((char *)str);
 }

@@ -6,7 +6,7 @@
 /*   By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/31 15:58:53 by ycribier          #+#    #+#             */
-/*   Updated: 2014/01/06 14:27:36 by ycribier         ###   ########.fr       */
+/*   Updated: 2015/01/29 19:51:10 by ycribier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,14 @@ void	ft_perror(const char *msg)
 	ft_putendl_fd(sys_errlist[errno], 2);
 }
 
-void	error_msg(char *path, char *message)
+void	error_msg(char *message)
 {
-	if (path)
-	{
-		ft_putstr_fd(path, 2);
-		ft_putstr_fd(": ", 2);
-	}
 	if (message)
 		ft_putendl_fd(message, 2);
-	else
-		ft_putendl_fd("...", 2);
 }
 
-void	error_msg_exit(char *path, char *message)
+void	error_msg_exit(char *message)
 {
-	error_msg(path, message);
+	error_msg(message);
 	_exit(-1);
 }

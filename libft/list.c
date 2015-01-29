@@ -5,62 +5,72 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/01/07 12:19:31 by ycribier          #+#    #+#             */
-/*   Updated: 2014/01/10 00:33:20 by ycribier         ###   ########.fr       */
+/*   Created: 2014/02/19 16:25:54 by ycribier          #+#    #+#             */
+/*   Updated: 2014/03/13 14:02:57 by ycribier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
 #include "list.h"
 
-t_dlist		*list_create(void)
-{
-	t_dlist	*list;
+/*
+**		Returns the node pushed
+*/
 
-	list = malloc(sizeof(t_dlist));
-	if (!list)
-	{
-		ft_perror(NULL);
+t_list_node		*list_push_back(t_list_node **begin, void *value)
+{
+	t_list_node		*node;
+	t_list_node		*cursor;
+
+	node = malloc(sizeof(t_list_node));
+	if (!node)
 		return (NULL);
-	}
-	list->count = 0;
-	list->first = NULL;
-	list->last = NULL;
-	return (list);
-}
-
-void		list_destroy(t_dlist *list)
-{
-	t_dlist_node		*cur;
-
-	cur = list->first;
-	while (cur != NULL)
+	node->value = value;
+	node->next = NULL;
+	if (!*begin)
+		*begin = node;
+	else
 	{
-		if (cur->prev)
-		{
-			free(cur->prev);
-		}
-		cur = cur->next;
+		cursor = *begin;
+		while (cursor->next)
+			cursor = cursor->next;
+		cursor->next = node;
 	}
-	free(list->last);
-	free(list);
+	return (node);
 }
 
-void		list_clear(t_dlist *list)
+void			*list_pop_back(t_list_node **begin)
 {
-	t_dlist_node		*cur;
+	t_list_node		*node;
 
-	cur = list->first;
-	while (cur != NULL)
-	{
-		free(cur->value);
-		cur = cur->next;
-	}
+	if (!*begin)
+		return (NULL);
+	node = *begin;
+	while (node->next)
+		node = node->next;
+	return (list_remove(begin, node));
 }
 
-void		list_clear_destroy(t_dlist *list)
+void			list_push_front(t_list_node **begin, void *value)
 {
-	list_clear(list);
-	list_destroy(list);
+	t_list_node		*node;
+
+	node = malloc(sizeof(t_list_node));
+	if (!node)
+		return ;
+	node->value = value;
+	if (!*begin)
+		node->next = NULL;
+	else
+		node->next = *begin;
+	*begin = node;
+}
+
+void			*list_pop_front(t_list_node **begin)
+{
+	t_list_node		*node;
+
+	if (!*begin)
+		return (NULL);
+	node = *begin;
+	return (list_remove(begin, node));
 }

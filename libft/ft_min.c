@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_min.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/11/22 11:03:50 by ycribier          #+#    #+#             */
-/*   Updated: 2015/01/28 17:59:05 by ycribier         ###   ########.fr       */
+/*   Created: 2014/03/01 11:27:47 by ycribier          #+#    #+#             */
+/*   Updated: 2014/03/01 11:29:22 by ycribier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-
-char	*ft_strchr(char const *str, int c)
+int			ft_min(int x, int y)
 {
-	size_t	i;
+	if (x < y)
+		return (x);
+	return (y);
+}
 
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == c)
-			return ((char *)&str[i]);
-		i++;
-	}
-	if (str[i] == c)
-		return ((char *)&str[i]);
-	else
-		return (NULL);
+float		ft_fmin(float x, float y)
+{
+	if (x < y)
+		return (x);
+	return (y);
+}
+
+double		ft_dmin(double x, double y)
+{
+	if (x < y)
+		return (x);
+	return (y);
 }

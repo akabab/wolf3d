@@ -6,7 +6,7 @@
 /*   By: ycribier <ycribier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/12 06:45:37 by ycribier          #+#    #+#             */
-/*   Updated: 2014/03/02 12:07:41 by ycribier         ###   ########.fr       */
+/*   Updated: 2015/01/29 19:42:57 by ycribier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 static void	manage_unique_collision(t_pt *pt1, t_pt *pt2, t_col *col, t_env *e)
 {
 	if (!pt1 && !pt2)
-		error_msg(NULL, "!(pt1 & pt2)");
+		error_msg("!(pt1 & pt2)");
 	else if (!pt1)
 	{
 		col->dst = fabs((e->pl.pos.x - pt2->x) / cosf(fdeg_to_rad(col->angle)));
